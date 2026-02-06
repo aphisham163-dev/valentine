@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:radial-gradient(circle at top,#ffd6e8,#ff9a9e);
+      font-family:'Poppins',sans-serif;
+      overflow:hidden;
+    }
+
+    /* floating hearts */
+    .heart{
+      position:fixed;
+      bottom:-20px;
+      font-size:16px;
+      animation:float 6s linear infinite;
+      opacity:.6;
+    }
+    @keyframes float{
+      0%{transform:translateY(0) scale(.8);opacity:.6}
+      100%{transform:translateY(-110vh) scale(1.3);opacity:0}
+    }
+
+    .card{
+      background:rgba(255,255,255,.95);
+      padding:46px 34px 42px;
+      border-radius:28px;
+      text-align:center;
+      box-shadow:0 25px 60px rgba(255,77,166,.35);
+      max-width:340px;
+      width:92%;
+      animation:pop .8s ease;
+    }
+    @keyframes pop{
+      from{transform:scale(.9);opacity:0}
+      to{transform:scale(1);opacity:1}
+    }
+
+    h1{
+      font-family:'Playfair Display',serif;
+      font-weight:600;
+      color:#e60073;
+      margin-bottom:14px;
+    }
+    .sub{
+      font-size:14px;
+      color:#555;
+      margin-bottom:20px;
+    }
+
+    .buttons{
+      position:relative;
+      height:90px;
+    }
+
+    button{
+      padding:12px 26px;
+      border:none;
+      border-radius:999px;
+      font-size:16px;
+      cursor:pointer;
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    button:active{transform:scale(.95)}
+
+    #yes{
+      background:linear-gradient(135deg,#ff4da6,#ff85c1);
+      color:#fff;
+      box-shadow:0 10px 25px rgba(255,77,166,.45);
+    }
+    #yes:hover{box-shadow:0 14px 32px rgba(255,77,166,.6)}
+
+    #no{
+      background:#eee;
+      color:#555;
+      position:fixed;
+      padding:10px 18px;
+      font-size:14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Will you be my Valentine? 💖</h1>
+    <div class="sub">I have a very important question for you…</div>
+
+    <div class="buttons">
+      <button id="yes" onclick="yesClick()">Yes 💕</button>
+      <button id="no">No 🙈</button>
+    </div>
+  </div>
+
+  <script>
+    /* floating hearts generator */
+    setInterval(()=>{
+      const h=document.createElement('div');
+      h.className='heart';
+      h.innerText=Math.random()>.5?'❤️':'💗';
+      h.style.left=Math.random()*100+'vw';
+      h.style.animationDuration=4+Math.random()*4+'s';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),7000);
+    },500);
+
+    const noBtn=document.getElementById('no');
+
+    noBtn.addEventListener('mouseover',moveNo);
+    noBtn.addEventListener('touchstart',moveNo);
+
+    function moveNo(){
+      const pad=20;
+      const maxX=window.innerWidth-noBtn.offsetWidth-pad;
+      const maxY=window.innerHeight-noBtn.offsetHeight-pad;
+      noBtn.style.left=Math.random()*maxX+'px';
+      noBtn.style.top=Math.random()*maxY+'px';
+    }
+
+    function yesClick(){
+      document.body.innerHTML = `
+        <div class="card" style="animation:pop .8s ease">
+          <h1 style="font-family:'Playfair Display',serif;color:#e60073">
+            Yayyyy! 😍💘
+          </h1>
+          <p class="sub">
+            You just made me the happiest person ❤️
+          </p>
+
+          <img 
+            src="kitty.gif"
+            alt="Valentine gif"
+            style="
+              margin-top:18px;
+              max-width:260px;
+              width:100%;
+              height:auto;
+              display:block;
+              margin-left:auto;
+              margin-right:auto;
+            "
+          />
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
